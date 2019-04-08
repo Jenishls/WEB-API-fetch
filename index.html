@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<button id="getData">GET DATA FROM API </button>
+    <ul id="result"></ul>
+
+<script type="text/javascript">
+	document.getElementById('getData').addEventListener('click', getAPI);
+	function getAPI(){
+		var url = 'https://newsapi.org/v2/top-headlines?' +
+          'country=us&' +
+          'apiKey=45b0542cd58649ba8e2eb7d9796746f9';
+		var req = new Request(url);
+
+		fetch(req)
+		    .then(function(response) {
+		        return response.json();
+		    })
+		    .then((data) => {
+		    	let articles = data.articles;
+		    	let thing = '';
+		    	articles.forEach(function(i,v){
+		    		 thing = thing+`<h3>`+i.title+`</h3>`+
+		    					`<p>`+i.description+`</p>`;	
+		    	});
+		    		document.getElementById('result').innerHTML = thing;
+		    });
+           
+        }
+</script>
+</body>
+</html>
